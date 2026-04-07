@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvMoney"
+        android:text="Dinero: 1000"
+        android:textSize="22sp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tvTurn"
+        android:text="Turno: 1"
+        android:textSize="18sp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tvGoal"
+        android:text="Meta: 5000"
+        android:textSize="18sp"
+        android:layout_marginBottom="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btnAhorrar"
+        android:text="Ahorrar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btnInvertir"
+        android:text="Invertir"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btnGastar"
+        android:text="Gastar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

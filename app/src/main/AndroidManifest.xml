@@ -19,6 +19,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- META -->
+        <activity android:name=".ui.meta.MetaActivity" />
+
+        <!-- GAME -->
+        <activity android:name=".ui.game.GameActivity" />
 
         <!-- MainActivity ya NO es la principal -->
         <activity

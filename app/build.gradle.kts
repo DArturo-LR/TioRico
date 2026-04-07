@@ -54,6 +54,7 @@ dependencies {
     implementation(libs.androidx.credentials.play.services.auth)
     implementation(libs.googleid)
     implementation(libs.androidx.appcompat)
+    implementation("com.google.firebase:firebase-database-ktx:21.0.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
