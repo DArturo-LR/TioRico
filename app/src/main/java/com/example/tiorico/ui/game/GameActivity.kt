@@ -20,6 +20,7 @@ class GameActivity : AppCompatActivity() {
     private lateinit var tvGoal: TextView
     private lateinit var tvResult: TextView
     private lateinit var tvPlayer: TextView
+    private lateinit var tvEvent: TextView
 
     private var money = 1000
     private var goal = 5000
@@ -35,6 +36,7 @@ class GameActivity : AppCompatActivity() {
         tvGoal = findViewById(R.id.tvGoal)
         tvResult = findViewById(R.id.tvResult)
         tvPlayer = findViewById(R.id.tvPlayer)
+        tvEvent = findViewById(R.id.tvEvent)
 
         val email = FirebaseAuth.getInstance().currentUser?.email
         tvPlayer.text = "Jugador: $email"
@@ -65,8 +67,17 @@ class GameActivity : AppCompatActivity() {
     private fun siguienteTurno(mensaje: String) {
         turn++
 
-        // 🔥 Mostrar en pantalla
+        val evento = eventoAleatorio()
+
+        // 👉 Resultado (acción del jugador)
         tvResult.text = mensaje
+
+        // 👉 Evento separado
+        if (evento.isNotEmpty()) {
+            tvEvent.text = "Evento: $evento"
+        } else {
+            tvEvent.text = "Evento: No hubo ningún evento"
+        }
 
         Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
 
@@ -99,6 +110,23 @@ class GameActivity : AppCompatActivity() {
         } else if (money <= 0) {
             Toast.makeText(this, "Perdiste", Toast.LENGTH_LONG).show()
             finish()
+        }
+    }
+    private fun eventoAleatorio(): String {
+        val probabilidad = (1..100).random()
+
+        return if (probabilidad <= 30) { // 30% de probabilidad
+            val evento = listOf(
+                "Encontraste dinero en la calle +300" to 300,
+                "Te robaron dinero -250" to -250,
+                "Ganaste un premio +400" to 400,
+                "Pagaste una multa -200" to -200
+            ).random()
+
+            money += evento.second
+            evento.first
+        } else {
+            "" // no pasa nada
         }
     }
 }
