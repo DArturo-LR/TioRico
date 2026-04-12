@@ -7,6 +7,14 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/tvPlayer"
+        android:text="Jugador:"
+        android:textSize="18sp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
         android:id="@+id/tvMoney"
         android:text="Dinero: 1000"
         android:textSize="22sp"
@@ -25,6 +33,13 @@
     <TextView
         android:id="@+id/tvGoal"
         android:text="Meta: 5000"
+        android:textSize="18sp"
+        android:layout_marginBottom="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/tvResult"
+        android:text="Resultado:"
         android:textSize="18sp"
         android:layout_marginBottom="20dp"
         android:layout_width="wrap_content"

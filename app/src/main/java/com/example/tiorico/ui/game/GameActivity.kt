@@ -18,6 +18,8 @@ class GameActivity : AppCompatActivity() {
     private lateinit var tvMoney: TextView
     private lateinit var tvTurn: TextView
     private lateinit var tvGoal: TextView
+    private lateinit var tvResult: TextView
+    private lateinit var tvPlayer: TextView
 
     private var money = 1000
     private var goal = 5000
@@ -31,6 +33,11 @@ class GameActivity : AppCompatActivity() {
         tvMoney = findViewById(R.id.tvMoney)
         tvTurn = findViewById(R.id.tvTurn)
         tvGoal = findViewById(R.id.tvGoal)
+        tvResult = findViewById(R.id.tvResult)
+        tvPlayer = findViewById(R.id.tvPlayer)
+
+        val email = FirebaseAuth.getInstance().currentUser?.email
+        tvPlayer.text = "Jugador: $email"
 
         val btnAhorrar = findViewById<Button>(R.id.btnAhorrar)
         val btnInvertir = findViewById<Button>(R.id.btnInvertir)
@@ -57,6 +64,9 @@ class GameActivity : AppCompatActivity() {
 
     private fun siguienteTurno(mensaje: String) {
         turn++
+
+        // 🔥 Mostrar en pantalla
+        tvResult.text = mensaje
 
         Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
 
