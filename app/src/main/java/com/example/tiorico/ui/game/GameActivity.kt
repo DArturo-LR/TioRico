@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.tiorico.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import android.content.Intent
+import com.example.tiorico.ui.login.LoginActivity
 
 
 class GameActivity : AppCompatActivity() {
@@ -21,6 +23,7 @@ class GameActivity : AppCompatActivity() {
     private lateinit var tvResult: TextView
     private lateinit var tvPlayer: TextView
     private lateinit var tvEvent: TextView
+
 
     private var money = 1000
     private var goal = 5000
@@ -44,6 +47,7 @@ class GameActivity : AppCompatActivity() {
         val btnAhorrar = findViewById<Button>(R.id.btnAhorrar)
         val btnInvertir = findViewById<Button>(R.id.btnInvertir)
         val btnGastar = findViewById<Button>(R.id.btnGastar)
+        val btnSalir = findViewById<Button>(R.id.btnSalir)
 
         actualizarUI()
 
@@ -61,6 +65,13 @@ class GameActivity : AppCompatActivity() {
         btnGastar.setOnClickListener {
             money -= 150
             siguienteTurno("Gastaste -150")
+        }
+        btnSalir.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 
