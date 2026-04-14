@@ -7,8 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.tiorico.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.example.tiorico.ui.meta.MetaActivity
 import android.content.Intent
-import com.example.tiorico.ui.login.LoginActivity
 
 
 class GameActivity : AppCompatActivity() {
@@ -67,9 +67,7 @@ class GameActivity : AppCompatActivity() {
             siguienteTurno("Gastaste -150")
         }
         btnSalir.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
-
-            val intent = Intent(this, LoginActivity::class.java)
+            val intent = Intent(this, MetaActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -116,12 +114,21 @@ class GameActivity : AppCompatActivity() {
 
     private fun verificarEstado() {
         if (money >= goal) {
-            Toast.makeText(this, "¡Ganaste!", Toast.LENGTH_LONG).show()
-            finish()
+            irAResultado("¡Ganaste!")
         } else if (money <= 0) {
-            Toast.makeText(this, "Perdiste", Toast.LENGTH_LONG).show()
-            finish()
+            irAResultado("Perdiste")
         }
+    }
+    private fun irAResultado(estado: String) {
+        val intent = Intent(this, com.example.tiorico.ui.result.ResultActivity::class.java)
+
+        intent.putExtra("money", money)
+        intent.putExtra("goal", goal)
+        intent.putExtra("turn", turn)
+        intent.putExtra("estado", estado)
+
+        startActivity(intent)
+        finish()
     }
     private fun eventoAleatorio(): String {
         val probabilidad = (1..100).random()

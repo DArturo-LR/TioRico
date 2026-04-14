@@ -25,6 +25,8 @@
         <!-- GAME -->
         <activity android:name=".ui.game.GameActivity" />
 
+        <activity android:name=".ui.result.ResultActivity" />
+
         <!-- MainActivity ya NO es la principal -->
         <activity
             android:name=".MainActivity"
