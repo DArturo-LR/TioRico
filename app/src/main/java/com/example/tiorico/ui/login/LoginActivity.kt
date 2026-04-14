@@ -54,7 +54,7 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this, "Login correcto", Toast.LENGTH_SHORT).show()
 
                     // 👉 IR A META
-                    startActivity(Intent(this, MetaActivity::class.java))
+                    startActivity(Intent(this, com.example.tiorico.ui.lobby.LobbyActivity::class.java))
                     finish()
 
                 } else {

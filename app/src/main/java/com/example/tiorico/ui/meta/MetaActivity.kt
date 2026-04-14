@@ -1,11 +1,11 @@
 package com.example.tiorico.ui.meta
 
+
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tiorico.R
-import com.example.tiorico.ui.game.GameActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
@@ -31,17 +31,25 @@ class MetaActivity : AppCompatActivity() {
 
         val uid = userId ?: return
 
-        val roomId = "room1"
+        val roomId = database.child("gameRooms").push().key!! // 🔥 único
+        val code = generarCodigo()
 
         val room = mapOf(
             "goal" to meta,
             "turnNumber" to 1,
-            "currentTurn" to uid
+            "currentTurn" to uid,
+            "code" to code,
+            "status" to "waiting",
+            "player1Id" to uid,
+            "player2Id" to ""
         )
+
+        val email = FirebaseAuth.getInstance().currentUser?.email ?: ""
 
         val player = mapOf(
             "money" to 1000,
-            "turn" to true
+            "turn" to true,
+            "email" to email
         )
 
         database.child("gameRooms").child(roomId).setValue(room)
@@ -52,8 +60,19 @@ class MetaActivity : AppCompatActivity() {
             .child(uid)
             .setValue(player)
 
-        val intent = Intent(this, GameActivity::class.java)
-        intent.putExtra("goal", meta)
+        // 👉 IR A SALA DE ESPERA
+        val intent = Intent(this, com.example.tiorico.ui.waiting.WaitingRoomActivity::class.java)
+        intent.putExtra("roomId", roomId)
+        intent.putExtra("code", code)
         startActivity(intent)
+        finish()
+    }
+
+    // 🔥 SOLO AQUÍ EXISTE ESTA FUNCIÓN
+    private fun generarCodigo(): String {
+        val chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        return (1..6)
+            .map { chars.random() }
+            .joinToString("")
     }
 }
