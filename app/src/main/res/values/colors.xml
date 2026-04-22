@@ -7,4 +7,16 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Modern Colors -->
+    <color name="primary">#1B5E20</color> <!-- Deep Green for "Rico" theme -->
+    <color name="primary_variant">#003300</color>
+    <color name="secondary">#FFD600</color> <!-- Gold -->
+    <color name="background">#F5F5F5</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="error">#B00020</color>
+    <color name="onPrimary">#FFFFFF</color>
+    <color name="onSecondary">#000000</color>
+    <color name="onBackground">#212121</color>
+    <color name="onSurface">#212121</color>
 </resources>

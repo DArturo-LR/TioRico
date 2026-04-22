@@ -6,11 +6,7 @@ plugins {
 
 android {
     namespace = "com.example.tiorico"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.tiorico"
@@ -54,6 +50,8 @@ dependencies {
     implementation(libs.androidx.credentials.play.services.auth)
     implementation(libs.googleid)
     implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.constraintlayout)
     implementation("com.google.firebase:firebase-database-ktx:21.0.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

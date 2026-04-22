@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Se cambia a MaterialComponents para que los nuevos botones y campos de texto modernos funcionen sin cerrarse -->
+    <style name="Theme.TioRico" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Colores principales -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_variant</item>
+        <item name="colorOnPrimary">@color/onPrimary</item>
+        <!-- Colores secundarios -->
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorOnSecondary">@color/onSecondary</item>
 
-    <style name="Theme.TioRico" parent="Theme.AppCompat.Light.NoActionBar"/>
+        <item name="android:statusBarColor">@color/primary_variant</item>
+    </style>
 </resources>
