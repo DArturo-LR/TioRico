@@ -19,11 +19,20 @@ class LobbyViewModel : ViewModel() {
     private val _salaUnida = MutableLiveData<String?>()
     val salaUnida: LiveData<String?> = _salaUnida
 
-    fun crearSala(meta: Int) {
+    private val _codeExists = MutableLiveData<Boolean>()
+    val codeExists: LiveData<Boolean> = _codeExists
+
+    fun checkCode(code: String) {
+        gameRepo.checkCodeExists(code) { exists ->
+            _codeExists.postValue(exists)
+        }
+    }
+
+    fun crearSala(meta: Int, code: String) {
         val uid = authRepo.currentUserId ?: return
         val email = authRepo.currentEmail ?: ""
-        gameRepo.crearSala(uid, email, meta) { roomId, code ->
-            _salaCreada.postValue(Pair(roomId, code))
+        gameRepo.crearSala(uid, email, meta, code) { roomId, finalCode ->
+            _salaCreada.postValue(Pair(roomId, finalCode))
         }
     }
 

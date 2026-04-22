@@ -7,20 +7,20 @@ class GameRepository {
 
     private val db = FirebaseDatabase.getInstance().reference
 
-    // ── Crear sala ──────────────────────────────────────────────
+    // ── Crear sala con código personalizado ─────────────────────
     fun crearSala(
         uid: String,
         email: String,
         meta: Int,
+        customCode: String,
         onCreated: (roomId: String, code: String) -> Unit
     ) {
         val roomId = db.child("gameRooms").push().key!!
-        val code = generarCodigo()
-
+        
         val room = mapOf(
             "goal" to meta,
             "currentTurn" to uid,
-            "code" to code,
+            "code" to customCode,
             "status" to "waiting",
             "player1Id" to uid,
             "player2Id" to ""
@@ -30,7 +30,7 @@ class GameRepository {
         db.child("gameRooms").child(roomId).setValue(room)
         db.child("gameRooms").child(roomId).child("players").child(uid).setValue(player)
 
-        onCreated(roomId, code)
+        onCreated(roomId, customCode)
     }
 
     // ── Unirse por código ────────────────────────────────────────
@@ -154,8 +154,18 @@ class GameRepository {
             })
     }
 
-    // ── Helpers ──────────────────────────────────────────────────
-    private fun generarCodigo(): String {
+    fun checkCodeExists(code: String, onResult: (Boolean) -> Unit) {
+        db.child("gameRooms")
+            .orderByChild("code").equalTo(code)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    onResult(snapshot.exists())
+                }
+                override fun onCancelled(error: DatabaseError) { onResult(false) }
+            })
+    }
+
+    fun generarCodigoAleatorio(): String {
         val chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         return (1..6).map { chars.random() }.joinToString("")
     }
